@@ -8,10 +8,10 @@ namespace MobileShopping.Controllers
 {
     public class AccountController : Controller
     {
-        AccountRepository accountRepository;
+        //MobileDBContext accountRepository;
         public AccountController()
         {
-            accountRepository = new AccountRepository();
+            //accountRepository = new MobileDBContext();
         }
         [HttpGet]
         [ActionName("SignUp")]
@@ -32,13 +32,13 @@ namespace MobileShopping.Controllers
                 user.MailId = signUpModel.MailId;
                 user.Password = signUpModel.Password;
                 user.MobileNo = signUpModel.MobileNo;
-                user.CreateDate = signUpModel.CreateDate;
-                user.UpdatedDate = signUpModel.UpdatedDate;
-                user.LastLoginTime = signUpModel.LastLoginTime;
+                user.CreateDate = DateTime.Now;
+                user.UpdatedDate = DateTime.Now; ;
+                user.LastLoginTime = DateTime.Now; ;
                 user.Gender = signUpModel.Gender;
                 user.Age = signUpModel.Age;
                 user.City = signUpModel.City;
-               // accountRepository.AddUser(user);
+                // accountRepository.AddUser(user);
                 TempData["Message"] = "User added successfully!!!";
                 return RedirectToAction("Login");
             }
@@ -62,19 +62,19 @@ namespace MobileShopping.Controllers
             }
             return View();
         }
-       public ActionResult EditUser([Bind(Exclude = "UserId,MailId,CreateDate")] Account user)
-        {
-            user.UserId = AccountRepository.accounts.Find(name => name.UserName == user.UserName).UserId;
-            user.MailId = AccountRepository.accounts.Find(name => name.UserName == user.UserName).MailId;
-            user.CreateDate = AccountRepository.accounts.Find(name => name.UserName == user.UserName).CreateDate;
-            user.UpdatedDate = DateTime.Now;
-            if (ModelState.IsValid)
-            {
-                accountRepository.UpdateUser(user);
-                TempData["Message"] = "User details edited successfully";
-                return RedirectToAction("Display");
-            }
-            return  View(user);
-        }
+        //public ActionResult EditUser([Bind(Exclude = "UserId,MailId,CreateDate")] Account user)
+        //{
+        //    user.UserId = AccountRepository.accounts.Find(name => name.UserName == user.UserName).UserId;
+        //    user.MailId = AccountRepository.accounts.Find(name => name.UserName == user.UserName).MailId;
+        //    user.CreateDate = AccountRepository.accounts.Find(name => name.UserName == user.UserName).CreateDate;
+        //    user.UpdatedDate = DateTime.Now;
+        //    if (ModelState.IsValid)
+        //    {
+        //        accountRepository.UpdateUser(user);
+        //        TempData["Message"] = "User details edited successfully";
+        //        return RedirectToAction("Display");
+        //    }
+        //    return View(user);
+        //}
     }
 }

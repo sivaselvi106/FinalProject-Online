@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,5 +46,9 @@ namespace MobileShopping.Repository
             updateUser.City = user.City;
             updateUser.Age = user.Age;
         }
+    }
+    public class AccountContext : DbContext
+    {
+        public DbSet<Account> AccountDB { get; set; }
     }
 }

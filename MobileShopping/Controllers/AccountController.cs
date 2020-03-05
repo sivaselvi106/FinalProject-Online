@@ -23,7 +23,8 @@ namespace MobileShopping.Controllers
         [ActionName("SignUp")]
         public ActionResult SignUp_Post(SignUpModel signUpModel)
         {
-            //TryUpdateModel(user);
+            AccountContext accountContext = new AccountContext();
+            accountContext.SaveChanges();
             if (ModelState.IsValid)
             {
                 Account user = new Account();
@@ -33,12 +34,12 @@ namespace MobileShopping.Controllers
                 user.Password = signUpModel.Password;
                 user.MobileNo = signUpModel.MobileNo;
                 user.CreateDate = DateTime.Now;
-                user.UpdatedDate = DateTime.Now; ;
-                user.LastLoginTime = DateTime.Now; ;
+                user.UpdatedDate = DateTime.Now;
+                user.LastLoginTime = DateTime.Now;
                 user.Gender = signUpModel.Gender;
                 user.Age = signUpModel.Age;
                 user.City = signUpModel.City;
-                // accountRepository.AddUser(user);
+                accountContext.AccountDB.Add(user);
                 TempData["Message"] = "User added successfully!!!";
                 return RedirectToAction("Login");
             }

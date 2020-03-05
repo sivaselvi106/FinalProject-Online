@@ -8,6 +8,10 @@ using MobileShopping.Entity;
 
 namespace MobileShopping.Repository
 {
+    public class AccountContext : DbContext
+    {
+        public DbSet<Account> AccountDB { get; set; }
+    }
     public class AccountRepository
     {
         public static List<Account> accounts = new List<Account>();
@@ -47,8 +51,5 @@ namespace MobileShopping.Repository
             updateUser.Age = user.Age;
         }
     }
-    public class AccountContext : DbContext
-    {
-        public DbSet<Account> AccountDB { get; set; }
-    }
+  
 }
